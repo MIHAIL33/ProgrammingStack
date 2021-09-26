@@ -1,0 +1,18 @@
+- name: "Add GpG key (elasticsearch)"
+  apt_key: 
+    state: present
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+ 
+- name: "Download deb (elasticsearch)"
+  apt_repository: 
+    repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+    state: present
+  
+- name: "Install (elasticsearch)"
+  apt: elasticsearch 
+  update_cache: true
+
+- name: "Starting (elasticsearch)"
+  service: 
+    name: elasticsearch
+    state: started

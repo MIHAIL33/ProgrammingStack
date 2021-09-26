@@ -1,0 +1,12 @@
+- name: Download deb (java)
+  apt_repository: 
+    repo: ppa:linuxuprising/java
+
+- name: Automatically accept the Oracle license (java) 
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+
+- name: Install (java)
+  apt: 
+   name: oracle-java8-installer
+   state: present
+   update_cache: yes 

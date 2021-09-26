@@ -1,0 +1,10 @@
+- hosts: cluster
+  remote_user: master
+  become: yes
+  become_user: master
+  roles:
+  - { role: java }
+#  - { role: elasticsearch }
+#  - { role: kibana }
+#  - { role: metricbeat }
+
