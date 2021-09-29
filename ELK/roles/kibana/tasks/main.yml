@@ -5,7 +5,8 @@
           name: kibana
           update_cache: yes
 
-- name: Start kibana
+
+- name: Started kibana
   service:
     name: kibana
     state: started
