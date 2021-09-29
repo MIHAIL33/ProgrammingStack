@@ -1,0 +1,16 @@
+===============================================================================================================
+					Установка ansible
+1. python3 --version - проверка, установлен ли python3
+2. sudo apt install python3-pip - установка pip3
+3. sudo apt install ansible - установка Ansible
+4. sudo vim /etc/ansible/hosts - добавляем хосты
+	[all] - общая группа (вкл. в себя masterserver, server1, server2)
+	masterserver - хост на котором установлен ansible
+    
+	[webservers] - группа в которую записываются хосты, с которыми будет взаимодействовать ansible, допускается запись server[1:2]
+	server1
+	server2
+	
+5. ansible all --list-hosts - список хостов
+6. ansible all -m ping - пингуется список хостов для проверки
+7. запуск playbook: ansible-playbook --ask-become-pass <playbook> -l <group/server> -u <user> - установка на группе.сервере ПО из playbook, --ask-become-pass - запросить пароль перед установкой

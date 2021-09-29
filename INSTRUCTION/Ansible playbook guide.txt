@@ -1,0 +1,43 @@
+1. Структура проекта
+	dir1
+		- role.yml
+		- roles (dir)
+			dir1
+				tasks (dir)
+					- main.yml
+			dir2
+				tasks (dir)
+					- main.yml
+			....................
+			dirN
+				tasks (dir)
+					- main.yml
+					
+2. Файл с ролями (role.yml) (запускается первым, в нем прописаны roles, в которых записаны порядок выполнения задач(tasks))
+	hosts - записывается, на каких хостах выполняются таски
+	remote_user - пользователь по которому идет коннект к серверам от главного хоста
+	become: <yes/no>
+	become_user - будет ли запрашиивать пароль и от какого пользователя будут выполняться команды
+	roles:
+		- {role: <dir_name>} - список задач
+
+3. Файл с задачами (main.yml):
+
+	- name - директива для описания инструкции
+	
+	apt_repository: (добавление репозитория)
+      repo: <dep repo>
+      state: <version>
+	
+	
+	apt: (аналог apt install <pack>)
+	  name: <install_pack_name>
+	  update_cache: <yes/no>
+	
+	linefile: (дописать в файл)
+	  path: <путь к файлу>
+	  line: <строчка на запись>
+	  
+	service: (аналог systemctl start service)
+		name: <service>
+		state: started
