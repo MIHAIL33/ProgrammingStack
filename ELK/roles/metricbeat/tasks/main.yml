@@ -7,7 +7,7 @@
           update_cache: yes
 
 
-- name:
+- name: started metricbeat
   service:
     name: metricbeat
     state: started
