@@ -1,0 +1,35 @@
+======================================================================================================================
+									Настройка кластера elasticsearch
+	
+	1. На всех серверах необходимо отредактировать файл /etc/elasticsearch/elasticsearch.yml
+	
+		добавить следующие строчки:
+			cluster.name: <clustername>
+			node.name: <nodename>
+			node.master: <true/false>
+			node.data <true/false> #хранятся ли на данном сервере данные
+			network.host: <ip адрес сервера>
+			http.port: <порт, обычно оставляется по умолчанию>
+			discovery.seed_hosts: <[список адресов ip адресов кластера]>
+			cluster.initial_master_nodes: <["список кластеров, которые могут принимать роль мастера"]>
+	
+	2. На всех серверах выполнить: systemctl stop elasticsearch
+								   systemctl start elasticsearch
+		
+	3. Проверка с помощью rest, ответ JSON
+		3.1. состояние кластера: curl -XGET 192.168.1.10:9200/_cluster/health?pretty
+		3.2. узнать кто мастер: curl -XGET 192.168.1.10:9200/_cat/master?v
+		3.3. список нод: curl -XGET 192.168.1.10:9200/_cat/nodes?v
+		3.4. состояние кластера: curl -XGET 192.168.1.10:9200/_cat/health?v
+		3.5. список возможных команд: curl -XGET 192.168.1.10:9200/_cat/
+	
+	4. Возможные ошибки (Решение, выполняется на всех серверах)
+		journalctl -xe | less - журнал ошибок
+		less +G /var/log/elasticsearch/elk.log - лог стека
+		
+		4.1. Слэйв-сервера подключились к другому кластеру (отличному от мастера):
+			4.1.1. systemctl stop elasticsearch
+			4.1.2. очистить директорию: rm -rf /var/lib/elasticsearch/* 
+			4.1.3. посмотреть внимательно пункт 1
+			4.1.4. systemctl start elasticsearch
+	

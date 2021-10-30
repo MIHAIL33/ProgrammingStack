@@ -1,21 +1,18 @@
+
 - name: Add Elasticsearch apt key
   apt_key:
    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
    state: present
 
-# Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
-
-- name: Adding Elasticsearch repo
-  apt_repository:
-   repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
-   state: present
-
-# Installing Elasticsearch
-
-- name: Install Elasticsearch
-  apt:
-   name: elasticsearch
-   update_cache: yes
+- name: "Download deb (elasticsearch)"
+  apt_repository: 
+    repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+    state: present
+  
+- name: "Install (elasticsearch)"
+  apt: 
+    name: elasticsearch 
+    update_cache: true
 
 - name: Rewrite config file
   lineinfile:
