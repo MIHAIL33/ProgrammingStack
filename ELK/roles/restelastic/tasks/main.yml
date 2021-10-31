@@ -2,3 +2,8 @@
   service:
     name: elasticsearch  
     state: restarted
+
+- name: Started metricbeat
+  service:
+    name: metricbeat
+    state: restarted

@@ -85,3 +85,4 @@ cluster.initial_master_nodes: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
 #
 #action.destructive_requires_name: true
 xpack.ml.enabled: false
+xpack.monitoring.enabled: true
