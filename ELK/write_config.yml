@@ -1,0 +1,6 @@
+- hosts: cluster
+  remote_user: master
+  become: yes
+  become_user: root
+  roles:
+  - { role: rewrite_config }
