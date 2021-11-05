@@ -1,0 +1,4 @@
+- name: Rewrite config file
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    line: 'xpack.ml.enabled: false'
